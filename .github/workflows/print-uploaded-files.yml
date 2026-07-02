@@ -1,0 +1,23 @@
+name: Print Uploaded File Names
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - '**'
+
+jobs:
+  list-uploaded-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Print Uploaded Files
+        run: |
+          echo "Files uploaded in this push:"
+          git diff --name-only HEAD~1 HEAD
